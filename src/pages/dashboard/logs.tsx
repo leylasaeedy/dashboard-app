@@ -4,6 +4,7 @@ import DashboardLayout from "@/components/layout/DashboardLayout";
 import { Box } from "@mui/material";
 import { usePageLogger } from "@/hooks/usePageLogger";
 import { PaginatedTable } from "@/components/ui/PaginatedTable";
+import { messages } from "@/i18n/en";
 
 export default function LogsPage() {
   const logs = useLogsStore((s) => s.logs);
@@ -20,7 +21,7 @@ export default function LogsPage() {
           mx: "auto",
         }}
       >
-        <h1>Logs</h1>
+        <h1>{messages.screens.dashboard.logs.logs}</h1>
         <PaginatedTable
           columns={[
             { header: "Action", accessor: (l) => l.action },

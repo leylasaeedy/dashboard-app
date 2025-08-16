@@ -1,6 +1,7 @@
 import { User } from "@/types/user.type";
 import { useQuery } from "@tanstack/react-query";
 import { API_BASE } from "./api.constants";
+import { userKeys } from "./queryKeys.constants";
 
 async function fetchUsers(): Promise<User[]> {
   const res = await fetch(`${API_BASE}/users`);
@@ -10,6 +11,6 @@ async function fetchUsers(): Promise<User[]> {
 
 export const useUsersQuery = () =>
   useQuery({
-    queryKey: ["users"],
+    queryKey: userKeys.all,
     queryFn: fetchUsers,
   });

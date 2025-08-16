@@ -4,6 +4,7 @@ import DashboardLayout from "@/components/layout/DashboardLayout";
 import { Card, CardContent, Typography } from "@mui/material";
 import { useUserDetailsQuery } from "@/lib/api/userDetailsQuery";
 import { usePageLogger } from "@/hooks/usePageLogger";
+import { messages } from "@/i18n/en";
 
 export default function UserDetailPage() {
   const router = useRouter();
@@ -21,7 +22,9 @@ export default function UserDetailPage() {
     return (
       <DashboardLayout>
         <Card sx={{ maxWidth: 500, mx: "auto", mt: 4 }}>
-          <CardContent>Loading...</CardContent>
+          <CardContent>
+            {messages.components.dashboard.common.loading}
+          </CardContent>
         </Card>
       </DashboardLayout>
     );
@@ -29,7 +32,7 @@ export default function UserDetailPage() {
     return (
       <DashboardLayout>
         <Card sx={{ maxWidth: 500, mx: "auto", mt: 4 }}>
-          <CardContent>Error loading user</CardContent>
+          <CardContent>{messages.screens.dashboard.user.error}</CardContent>
         </Card>
       </DashboardLayout>
     );
@@ -41,12 +44,21 @@ export default function UserDetailPage() {
           <Typography variant="h5" sx={{ mb: 4 }}>
             {user?.name}
           </Typography>
-          <Typography>Email: {user?.email}</Typography>
-          <Typography>Phone: {user?.phone}</Typography>
-          <Typography>Website: {user?.website}</Typography>
-          <Typography>Company: {user?.company?.name}</Typography>
           <Typography>
-            Address: {user?.address?.street}, {user?.address?.city}
+            {messages.screens.dashboard.user.email}: {user?.email}
+          </Typography>
+          <Typography>
+            {messages.screens.dashboard.user.phone}: {user?.phone}
+          </Typography>
+          <Typography>
+            {messages.screens.dashboard.user.website}: {user?.website}
+          </Typography>
+          <Typography>
+            {messages.screens.dashboard.user.company}: {user?.company?.name}
+          </Typography>
+          <Typography>
+            {messages.screens.dashboard.user.address}: {user?.address?.street},{" "}
+            {user?.address?.city}
           </Typography>
         </CardContent>
       </Card>

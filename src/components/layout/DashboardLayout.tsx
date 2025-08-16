@@ -12,6 +12,8 @@ import { AppBar, IconButton, Toolbar } from "@mui/material";
 
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import MenuIcon from "@mui/icons-material/Menu";
+import { removeAuth } from "@/utils/localStorageHandler.utils";
+import { messages } from "@/i18n/en";
 
 export default function DashboardLayout({
   children,
@@ -24,7 +26,7 @@ export default function DashboardLayout({
   const [drawerShow, setDrawerShow] = React.useState(false);
 
   const handleLogout = () => {
-    localStorage.removeItem("auth");
+    removeAuth();
     removeLogs();
     router.push("/login");
   };
@@ -81,7 +83,7 @@ export default function DashboardLayout({
             fullWidth
             sx={{ mt: 2 }}
           >
-            Logout
+            {messages.components.dashboard.layout.logout}
           </Button>
         </Box>
       </Drawer>

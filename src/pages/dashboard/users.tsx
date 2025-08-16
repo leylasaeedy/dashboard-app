@@ -5,6 +5,7 @@ import { useUsersQuery } from "@/lib/api/usersQuery";
 import { User } from "@/types/user.type";
 import { Box, Card, CardContent } from "@mui/material";
 import { usePageLogger } from "@/hooks/usePageLogger";
+import { messages } from "@/i18n/en";
 
 export default function UsersPage() {
   const { data: users = [], isLoading, isError } = useUsersQuery();
@@ -14,7 +15,9 @@ export default function UsersPage() {
     return (
       <DashboardLayout>
         <Card sx={{ maxWidth: 500, mx: "auto", mt: 4 }}>
-          <CardContent>Loading...</CardContent>
+          <CardContent>
+            {messages.components.dashboard.common.loading}
+          </CardContent>
         </Card>
       </DashboardLayout>
     );
@@ -22,7 +25,7 @@ export default function UsersPage() {
     return (
       <DashboardLayout>
         <Card sx={{ maxWidth: 500, mx: "auto", mt: 4 }}>
-          <CardContent>Error loading users list</CardContent>
+          <CardContent>{messages.screens.dashboard.users.error}</CardContent>
         </Card>
       </DashboardLayout>
     );
@@ -38,7 +41,7 @@ export default function UsersPage() {
           mx: "auto",
         }}
       >
-        <h1>Users</h1>
+        <h1>{messages.screens.dashboard.users.users}</h1>
         <Table
           columns={[
             { header: "Name", accessor: (u: User) => u.name },

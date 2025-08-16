@@ -4,16 +4,16 @@ import React from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
-import { AuthUser, RegisterFormUser } from "@/types/user.type";
+import { RegisterFormUser } from "@/types/user.type";
+import { registerUser } from "@/utils/localStorageHandler.utils";
+import { messages } from "@/i18n/en";
 
 export default function RegisterPage() {
   const { register, handleSubmit } = useForm<RegisterFormUser>();
   const router = useRouter();
 
   const onSubmit = (data: RegisterFormUser) => {
-    const users: AuthUser[] = JSON.parse(localStorage.getItem("users") || "[]");
-    users.push(data);
-    localStorage.setItem("users", JSON.stringify(users));
+    registerUser(data);
     router.push("/login");
   };
 
@@ -30,7 +30,7 @@ export default function RegisterPage() {
         my: 12,
       }}
     >
-      <h1>Register</h1>
+      <h1>{messages.screens.register.register}</h1>
       <TextField label="Name" {...register("name", { required: true })} />
       <TextField
         label="Username"
@@ -47,7 +47,7 @@ export default function RegisterPage() {
         {...register("password", { required: true })}
       />
       <Button variant="contained" color="primary" type="submit">
-        Register
+        {messages.screens.register.register}
       </Button>
     </Box>
   );

@@ -6,7 +6,8 @@ import Button from "@mui/material/Button";
 import Link from "next/link";
 import { Box, Snackbar } from "@mui/material";
 import { useLogsStore } from "@/store/logs.store";
-import { AuthUser } from "@/types/user.type";
+import { findUser } from "@/utils/localStorageHandler.utils";
+import { messages } from "@/i18n/en";
 
 export default function LoginPage() {
   const { register, handleSubmit } = useForm<{
@@ -25,11 +26,7 @@ export default function LoginPage() {
     email: string;
     password: string;
   }) => {
-    const users: AuthUser[] = JSON.parse(localStorage.getItem("users") || "[]");
-    const found = users.find(
-      (u) => u.email === email && u.password === password
-    );
-
+    const found = findUser(email, password);
     if (found) {
       addLog({ action: "login", meta: { path: router.asPath } });
       router.push("/dashboard/users");
@@ -55,7 +52,7 @@ export default function LoginPage() {
         onClose={() => setSnackOpen(false)}
         message="User doesnt exist or Wrong User Credentials"
       />
-      <h1>Login</h1>
+      <h1> {messages.screens.login.login}</h1>
       <TextField
         label="Email"
         type="email"
@@ -67,7 +64,7 @@ export default function LoginPage() {
         {...register("password", { required: true })}
       />
       <Button type="submit" variant="contained" color="primary">
-        Login
+        {messages.screens.login.login}
       </Button>
       <Button
         component={Link}
@@ -76,7 +73,7 @@ export default function LoginPage() {
         color="secondary"
         sx={{ mt: 2 }}
       >
-        Don`t have an account? Register
+        {messages.screens.login.noAccount}
       </Button>
     </Box>
   );
